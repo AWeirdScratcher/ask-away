@@ -9,3 +9,4 @@ replit.nix
 poetry.lock
 pyproject.toml
 .breakpoints
+**/__pycache__/
