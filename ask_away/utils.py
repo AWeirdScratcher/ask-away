@@ -19,8 +19,9 @@ REGULAR_CMDS = (
 )
 
 def get_badge(language: str) -> Optional[str]:
-    return None if language not in LANG_BADGES else (
-        LANG_BADGES[language.lower()].format("● " + language)
+    lang = language.lower()
+    return None if lang not in LANG_BADGES else (
+        LANG_BADGES[lang].format("● " + language)
     )
 
 def get_commands(*, without_run: bool = False):

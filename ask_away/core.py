@@ -66,8 +66,9 @@ def print_runnables(lang_codes) -> None:
 
     for lang, _ in lang_codes:
         bdg = get_badge(lang)
+
         if bdg:
-            languages.add(bg)
+            languages.add(bdg)
 
     if not languages:
         return
@@ -126,12 +127,21 @@ def cli():
 
                 continue
 
-            elif query == "/run" and files:
+            elif query == "/run":
+                if not files:
+                    console.print(
+                        "[red]No recent code is generated[/red]"
+                    )
+                    continue
+                
                 console.print("[blue]running...[/blue]")
                 run_code(files)
+                continue
 
             else:
-                console.print("Unrecognized command or bad usage")
+                console.print(
+                    "[red]Unrecognized command or bad usage[/red]"
+                )
                 continue
 
         disable_streaming = query.endswith("--wait")
@@ -147,13 +157,18 @@ def cli():
             "role": "user",
             "content": query
         })
-        response = ask(messages, disable_streaming=disable_streaming)
+        response = ask(
+            messages, 
+            disable_streaming=disable_streaming
+        )
         messages.append({
             "role": "assistant",
             "content": response
         })
         lang_codes = detect_lang_code(response)
+        print("lang codes", lang_codes)
         print_runnables(lang_codes)
+
         files = lang_codes
         
         console.print(
