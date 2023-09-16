@@ -1,4 +1,5 @@
 import os
+import shutil
 from typing import Dict, List
 
 import appdirs
@@ -69,6 +70,10 @@ class AppProject:
     def create(self) -> None:
         os.makedirs(self.p, exist_ok=True)
 
+    def remove(self) -> None:
+        shutil.rmtree(self.p)
+
+    @property
     def tree(self) -> Dict[str, str]:
         """Returns the project file tree.
 
