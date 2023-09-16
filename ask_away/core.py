@@ -125,24 +125,24 @@ def cli():
                         messages[-1]['content']
                     )
 
-                continue
-
             elif query == "/run":
                 if not files:
                     console.print(
-                        "[red]No recent code is generated[/red]"
+                        "[red]No recent code[/red]"
                     )
-                    continue
                 
                 console.print("[blue]running...[/blue]")
                 run_code(files)
-                continue
+
+            elif query == "/exit":
+                exit(0)
 
             else:
                 console.print(
                     "[red]Unrecognized command or bad usage[/red]"
                 )
-                continue
+
+            continue
 
         disable_streaming = query.endswith("--wait")
 
@@ -153,6 +153,7 @@ def cli():
                 continue
 
         console.print()
+
         messages.append({
             "role": "user",
             "content": query
@@ -169,7 +170,8 @@ def cli():
         print("lang codes", lang_codes)
         print_runnables(lang_codes)
 
-        files = lang_codes
+        if lang_codes:
+            files = lang_codes
         
         console.print(
             "[d white]commands:[/d white]",

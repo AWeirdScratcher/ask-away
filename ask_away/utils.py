@@ -15,7 +15,8 @@ LANG_BADGES = {
 REGULAR_CMDS = (
     "run",
     "copy",
-    "retry"
+    "retry",
+    "exit"
 )
 
 def get_badge(language: str) -> Optional[str]:
