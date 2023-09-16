@@ -1,0 +1,11 @@
+whoami.sh
+.config/
+.pythonlibs/
+main.py
+.upm/
+.cache/
+.replit
+replit.nix
+poetry.lock
+pyproject.toml
+.breakpoints
