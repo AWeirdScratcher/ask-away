@@ -61,17 +61,22 @@ def ask(
     stream.done()
     return stream.f
 
-def print_runnables(lang_codes):
-    if not lang_codes:
-        return
+def print_runnables(lang_codes) -> None:
+    languages = set()
 
-    languages = (get_badge(lang) or "" for lang, _ in lang_codes)
+    for lang, _ in lang_codes:
+        bdg = get_badge(lang)
+        if bdg:
+            languages.add(bg)
+
+    if not languages:
+        return
 
     console.print(
         "[d white]runnables:[/d white]\n",
     )
 
-    for lang in set(languages):
+    for lang in languages:
         if lang:
             console.print(" ", lang, end=" ")
 
